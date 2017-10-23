@@ -15,83 +15,82 @@ import java.net.URL;
 import org.json.*;
 
 @Controller
-@CrossOrigin(origins = {"http://localhost:4200","http://localhost:5200"}, maxAge = 3600)
 public class CompileCode {
 
 
 
 
-//  @RequestMapping(value= "/compile", method = RequestMethod.POST)
+  @RequestMapping(value= "/compile", method = RequestMethod.POST)
+
+  public @ResponseBody String compileCode(@RequestBody Code jsonString)
+  {
+    System.out.println("Received Request");
+    try {
+      String token = "144e1b784f339ff7538614188efcca31";
+      String testUrl = "http://6159f1ee.compilers.sphere-engine.com/api/v3/test?access_token=" + token;
+      String submitDetUrl = "http://6159f1ee.compilers.sphere-engine.com/api/v3/submissions/:id?access_token=" + token;
+      String compilerUrl = "http://6159f1ee.compilers.sphere-engine.com/api/v3/compilers?access_token=" + token;
+      String postUrl = "http://6159f1ee.compilers.sphere-engine.com/api/v3/submissions?access_token=" + token;
+      int responseCode;
+      int submissionId= 62706435;
+      //int submissionId = 62599488;
+
+      return getSubmissionStatus(submissionId);
+
+
+//      // Establishing a connection
+//      URL obj = new URL(postUrl);
+//      HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+//      con.setRequestMethod("GET");
+//      con.setRequestProperty("Content-Type", "application/json");
+//      con.setDoOutput(true);
 //
-//  public @ResponseBody String compileCode(@RequestBody Code jsonString)
-//  {
-//    System.out.println("Received Request");
-//    try {
-//      String token = "144e1b784f339ff7538614188efcca31";
-//      String testUrl = "http://6159f1ee.compilers.sphere-engine.com/api/v3/test?access_token=" + token;
-//      String submitDetUrl = "http://6159f1ee.compilers.sphere-engine.com/api/v3/submissions/:id?access_token=" + token;
-//      String compilerUrl = "http://6159f1ee.compilers.sphere-engine.com/api/v3/compilers?access_token=" + token;
-//      String postUrl = "http://6159f1ee.compilers.sphere-engine.com/api/v3/submissions?access_token=" + token;
-//      int responseCode;
-//      int submissionId= 62706435;
-//      //int submissionId = 62599488;
-//
-//      return getSubmissionStatus(submissionId);
+//      // Making Json Data and sending code
+//      JSONObject codeData = new JSONObject();
+//      codeData.put("language", String.valueOf(jsonString.getId()));
+//      codeData.put("sourceCode", jsonString.getCode());
+//      String finalCodeData = codeData.toString();
+//      System.out.println("Final JSON Object : " + finalCodeData);
 //
 //
-////      // Establishing a connection
-////      URL obj = new URL(postUrl);
-////      HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-////      con.setRequestMethod("GET");
-////      con.setRequestProperty("Content-Type", "application/json");
-////      con.setDoOutput(true);
-////
-////      // Making Json Data and sending code
-////      JSONObject codeData = new JSONObject();
-////      codeData.put("language", String.valueOf(jsonString.getId()));
-////      codeData.put("sourceCode", jsonString.getCode());
-////      String finalCodeData = codeData.toString();
-////      System.out.println("Final JSON Object : " + finalCodeData);
-////
-////
-////      OutputStreamWriter jsonDataWriter = new OutputStreamWriter(con.getOutputStream());
-////      jsonDataWriter.write(finalCodeData);
-////      jsonDataWriter.flush();
-////
-////      System.out.println("Wrote Data");
-////      responseCode = con.getResponseCode();
-////      System.out.println("Response Code : " + responseCode);
-////      // Getting Submission Id and Checking Status
-////      if (responseCode == 201) {
-////        System.out.println("Response Code Ok ");
-////        BufferedReader in = new BufferedReader(new InputStreamReader(
-////          con.getInputStream()));
-////
-////        String inputLine;
-////
-////        StringBuffer response = new StringBuffer();
-////
-////        while ((inputLine = in.readLine()) != null) {
-////          response.append(inputLine);
-////        }
-////        JSONTokener jsonData = new JSONTokener(new String(response));
-////        JSONObject root = new JSONObject(jsonData);
-////        submissionId = root.getInt("id");
-////
-////        System.out.println("Your Submission Id : " + submissionId);
-////        in.close();
-////        return getSubmissionStatus(submissionId);
-////        //Checking Status
-////
-////        // print result
-////        //System.out.println(response.toString());
-////      }
-//    }
-//    catch(Exception e) {
-//      return "{\"res\" :\"Error\"}";
-//    }
-//    //return "{\"res\" :\"Error\"}";
-//  }
+//      OutputStreamWriter jsonDataWriter = new OutputStreamWriter(con.getOutputStream());
+//      jsonDataWriter.write(finalCodeData);
+//      jsonDataWriter.flush();
+//
+//      System.out.println("Wrote Data");
+//      responseCode = con.getResponseCode();
+//      System.out.println("Response Code : " + responseCode);
+//      // Getting Submission Id and Checking Status
+//      if (responseCode == 201) {
+//        System.out.println("Response Code Ok ");
+//        BufferedReader in = new BufferedReader(new InputStreamReader(
+//          con.getInputStream()));
+//
+//        String inputLine;
+//
+//        StringBuffer response = new StringBuffer();
+//
+//        while ((inputLine = in.readLine()) != null) {
+//          response.append(inputLine);
+//        }
+//        JSONTokener jsonData = new JSONTokener(new String(response));
+//        JSONObject root = new JSONObject(jsonData);
+//        submissionId = root.getInt("id");
+//
+//        System.out.println("Your Submission Id : " + submissionId);
+//        in.close();
+//        return getSubmissionStatus(submissionId);
+//        //Checking Status
+//
+//        // print result
+//        //System.out.println(response.toString());
+//      }
+    }
+    catch(Exception e) {
+      return "{\"res\" :\"Error\"}";
+    }
+    //return "{\"res\" :\"Error\"}";
+  }
 
   public String getSubmissionStatus(int subId) throws Exception
   {

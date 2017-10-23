@@ -55,13 +55,13 @@ public class MainController {
 //
 //  }
 //
-  @RequestMapping(value= "/users/{username}", method = RequestMethod.GET)
-  public @ResponseBody void getByUsername(ModelMap model, @PathVariable("username") String username)
-  {
-
-    model.addAttribute("user", repository.findUsersByUsername(username));
-    System.out.println("Listed One");
-  }
+//  @RequestMapping(value= "/users/{username}", method = RequestMethod.GET)
+//  public @ResponseBody void getByUsername(ModelMap model, @PathVariable("username") String username)
+//  {
+//
+//    model.addAttribute("user", repository.findUsersByUsername(username));
+//    System.out.println("Listed One");
+//  }
 
   @RequestMapping(value = "/accessdenied")
   public String loginerror(ModelMap model) {

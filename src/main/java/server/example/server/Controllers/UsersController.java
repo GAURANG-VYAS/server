@@ -32,10 +32,10 @@ public class UsersController {
 //
 //  }
 //
-//  @RequestMapping(value= "/users/{username}", method = RequestMethod.GET)
-//  public @ResponseBody Users getByUsername(@PathVariable("username") String username)
-//  {
-//    return repository.findUsersByUsername(username);
-//
-//  }
+  @RequestMapping(value= "/users/{username}", method = RequestMethod.GET)
+  public @ResponseBody Users getByUsername(@PathVariable("username") String username)
+  {
+    return repository.findUsersByUsername(username);
+
+  }
 }
